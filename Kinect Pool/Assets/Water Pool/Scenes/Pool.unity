@@ -622,6 +622,7 @@ GameObject:
   - component: {fileID: 1413870190}
   - component: {fileID: 1413870189}
   - component: {fileID: 1413870188}
+  - component: {fileID: 1413870193}
   m_Layer: 0
   m_Name: Click Plane
   m_TagString: Untagged
@@ -644,7 +645,6 @@ MonoBehaviour:
   texture: {fileID: 8600000, guid: 9ac4f57ecbd684ba582087e52f76ccd5, type: 2}
   dropRadius: 0.095
   pause: 0
-  initialDropCount: 4
 --- !u!64 &1413870189
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -722,6 +722,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1413870193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413870187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 512ecde19a267d243939179b158f1208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minClusterSize: 1
+  maxClusterSize: 3
+  clusterDropWaitTime: 15
+  meanDropWaitTime: 1
+  dropWaitTimeStd: 1
+  dropOnStart: 1
 --- !u!1 &1633307278
 GameObject:
   m_ObjectHideFlags: 0
