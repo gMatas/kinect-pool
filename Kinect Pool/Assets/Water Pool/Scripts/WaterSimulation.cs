@@ -117,6 +117,18 @@ public class WaterSimulation : MonoBehaviour, IPointerClickHandler, IDragHandler
         // texture.Update(1);
     }
 
+     void ChangeCameraPosition() {
+      float targetY = GameObject.Find("Main Camera").transform.position.y;
+      float newY = targetY + 0.00145f;
+      GameObject.Find("Main Camera").transform.position = new Vector3(0.35f, newY, 0.13f);
+  }
+
+  void ChangeLightPosition() {
+      float targetY = GameObject.Find("Directional Light").transform.position.y;
+      float newY = targetY + 0.00145f;
+      GameObject.Find("Directional Light").transform.position = new Vector3(1.28f, newY, 0.252f);
+  }
+
     void UpdateZones()
     {
         if (collider == null) return;
@@ -134,6 +146,9 @@ public class WaterSimulation : MonoBehaviour, IPointerClickHandler, IDragHandler
             // Debug.Log("Clicked uv " + hit.textureCoord2);
             // AddWave(hit.textureCoord2, leftClick ? 2 : 3);
             AddWave(hit.textureCoord2);
+            
         }
+        ChangeLightPosition();
+        ChangeCameraPosition();
     }
 }
