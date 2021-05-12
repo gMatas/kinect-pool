@@ -24,8 +24,8 @@ namespace Neurorehab.Device_Kinect.Scripts
         [Header("Avatar additional information")]
         public GameObject AvatarMatObj;
 
-        [Header("Avatar Joints")] public GameObject Body;
-
+        [Header("Avatar Joints")] 
+        public GameObject Body;
         public GameObject GestureLeft;
         public GameObject GestureRight;
         public GameObject Head;
@@ -95,85 +95,85 @@ namespace Neurorehab.Device_Kinect.Scripts
             if (_kinectData == null)
                 _kinectData = (KinectData) GenericDeviceData;
 
-            //Body.transform.localPosition = _kinectData.GetPosition(KinectBones.waist.ToString());
+            Body.transform.localPosition = transform.parent.localPosition + _kinectData.GetPosition(KinectBones.waist.ToString());
 
             if (Head != null)
-                Head.transform.rotation = Body.transform.rotation *  //reference object
+                Head.transform.rotation = Body.transform.localRotation *  //reference object
                                       GenericDeviceData.GetRotation(KinectBones.head.ToString()) * //rotation that comes from kinect (world rotation)
                                       _initialRotations[(int) KinectBones.head]; //initial rotation of the head inside unity
 
             if (Neck != null)
-                Neck.transform.rotation = Body.transform.rotation * 
+                Neck.transform.rotation = Body.transform.localRotation * 
                                       GenericDeviceData.GetRotation(KinectBones.neck.ToString()) *
                                       _initialRotations[(int) KinectBones.neck];
 
             if (Torso != null)
-                Torso.transform.rotation = Body.transform.rotation * 
+                Torso.transform.rotation = Body.transform.localRotation * 
                                        GenericDeviceData.GetRotation(KinectBones.torso.ToString()) *
                                        _initialRotations[(int) KinectBones.torso];
 
             if (Waist != null)
-                Waist.transform.rotation = Body.transform.rotation * 
+                Waist.transform.rotation = Body.transform.localRotation * 
                                        GenericDeviceData.GetRotation(KinectBones.waist.ToString()) *
                                        _initialRotations[(int) KinectBones.waist];
 
             if (LeftShoulder != null)
-                LeftShoulder.transform.rotation = Body.transform.rotation *
+                LeftShoulder.transform.rotation = Body.transform.localRotation *
                                               GenericDeviceData.GetRotation(KinectBones.leftshoulder.ToString()) *
                                               _initialRotations[(int) KinectBones.leftshoulder];
 
             if (LeftElbow != null)
-                LeftElbow.transform.rotation = Body.transform.rotation *
+                LeftElbow.transform.rotation = Body.transform.localRotation *
                                            GenericDeviceData.GetRotation(KinectBones.leftelbow.ToString()) *
                                            _initialRotations[(int) KinectBones.leftelbow];
 
             if (LeftWrist != null)
-                LeftWrist.transform.rotation = Body.transform.rotation *
+                LeftWrist.transform.rotation = Body.transform.localRotation *
                                            GenericDeviceData.GetRotation(KinectBones.leftwrist.ToString()) *
                                            _initialRotations[(int) KinectBones.leftwrist];
 
             if (RightShoulder != null)
-                RightShoulder.transform.rotation = Body.transform.rotation *
+                RightShoulder.transform.rotation = Body.transform.localRotation *
                                                GenericDeviceData.GetRotation(KinectBones.rightshoulder.ToString()) *
                                                _initialRotations[(int) KinectBones.rightshoulder];
 
             if (RightElbow != null)
-                RightElbow.transform.rotation = Body.transform.rotation *
+                RightElbow.transform.rotation = Body.transform.localRotation *
                                             GenericDeviceData.GetRotation(KinectBones.rightelbow.ToString()) *
                                             _initialRotations[(int) KinectBones.rightelbow];
 
             if (RightWrist != null)
-                RightWrist.transform.rotation = Body.transform.rotation *
+                RightWrist.transform.rotation = Body.transform.localRotation *
                                             GenericDeviceData.GetRotation(KinectBones.rightwrist.ToString()) *
                                             _initialRotations[(int) KinectBones.rightwrist];
 
             if (LeftHip != null)
-                LeftHip.transform.rotation = Body.transform.rotation *
+                LeftHip.transform.rotation = Body.transform.localRotation *
                                          GenericDeviceData.GetRotation(KinectBones.lefthip.ToString()) *
                                          _initialRotations[(int) KinectBones.lefthip];
 
             if (LeftKnee != null)
-                LeftKnee.transform.rotation = Body.transform.rotation *
+                LeftKnee.transform.rotation = Body.transform.localRotation *
                                           GenericDeviceData.GetRotation(KinectBones.leftknee.ToString()) *
                                           _initialRotations[(int) KinectBones.leftknee];
 
             if (LeftAnkle != null)
-                LeftAnkle.transform.rotation = Body.transform.rotation *
+                LeftAnkle.transform.rotation = Body.transform.localRotation *
                                            GenericDeviceData.GetRotation(KinectBones.leftankle.ToString()) *
                                            _initialRotations[(int) KinectBones.leftankle];
 
             if (RightHip != null)
-                RightHip.transform.rotation = Body.transform.rotation *
+                RightHip.transform.rotation = Body.transform.localRotation *
                                           GenericDeviceData.GetRotation(KinectBones.righthip.ToString()) *
                                           _initialRotations[(int) KinectBones.righthip];
 
             if (RightKnee != null)
-                RightKnee.transform.rotation = Body.transform.rotation *
+                RightKnee.transform.rotation = Body.transform.localRotation *
                                            GenericDeviceData.GetRotation(KinectBones.rightknee.ToString()) *
                                            _initialRotations[(int) KinectBones.rightknee];
 
             if (RightAnkle != null)
-                RightAnkle.transform.rotation = Body.transform.rotation *
+                RightAnkle.transform.rotation = Body.transform.localRotation *
                                             GenericDeviceData.GetRotation(KinectBones.rightankle.ToString()) *
                                             _initialRotations[(int) KinectBones.rightankle];
         }

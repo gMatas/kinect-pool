@@ -148,7 +148,7 @@ public class WaterSimulation : MonoBehaviour, IPointerClickHandler, IDragHandler
             AddWave(hit.textureCoord2);
             
         }
-        ChangeLightPosition();
-        ChangeCameraPosition();
+        //ChangeLightPosition();
+        //ChangeCameraPosition();
     }
 }
