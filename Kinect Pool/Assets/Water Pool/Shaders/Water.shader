@@ -17,7 +17,7 @@ Shader "Unlit/Water"
     tiles ("Tile Texture", 2D) = "white" {}
     poolHeight ("Pool Height", Float) = 1
     sphereCenter ("Sphere Center", Vector) = (0, 0, 0, 0)
-    sphereRadius ("Sphere Radius", Float) = 0.25
+    sphereRadius ("Sphere Radius", Float) = 0.15
     light ("Light", Vector) = (0, -1, 0, 0)
     water ("Water", 2D) = "black" {}
     eye ("Eye", Vector) = (0, -1, 0, 0)
@@ -97,7 +97,7 @@ Shader "Unlit/Water"
         v2f o;
         float4 info = tex2Dlod(water, float4(v.vertex.xy * 0.5 + 0.5, 0, 0));
         o.position = v.vertex.xzy;
-        o.position.y += info.r;
+        o.position.y = 0;
         // o.vertex = UnityObjectToClipPos(v.vertex);
         o.vertex = UnityObjectToClipPos(o.position);
         // o.uv = TRANSFORM_TEX(v.uv, _MainTex);

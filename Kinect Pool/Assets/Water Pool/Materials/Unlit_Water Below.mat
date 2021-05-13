@@ -9,10 +9,10 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Unlit_Water Below
   m_Shader: {fileID: 4800000, guid: e2bc1aec84f6b4aeb80065fb09bba0bd, type: 3}
-  m_ShaderKeywords: UNDER_WATER
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -42,11 +42,11 @@ Material:
     m_Floats:
     - _Cull: 1
     - _MyCullVariable: 2
-    - _UnderWater: 1
+    - _UnderWater: 0
     - poolHeight: 2
     - sphereRadius: 0.25
     m_Colors:
-    - eye: {r: 0.9048246, g: 95.75626, b: -3.8326955, a: 0}
+    - eye: {r: 0, g: 76.22288, b: 0.000009086474, a: 0}
     - light: {r: -0, g: 0.9848078, b: 0.17364812, a: 0}
     - sphereCenter: {r: -200, g: -0.75, b: 0.2, a: 0}
   m_BuildTextureStacks: []

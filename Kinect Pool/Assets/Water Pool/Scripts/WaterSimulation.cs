@@ -20,6 +20,10 @@ public class WaterSimulation : MonoBehaviour, IPointerClickHandler, IDragHandler
     public float dropRadius; // uv units [0, 1]
     public bool pause = false;
 
+    public Camera main;
+    public Shader shader_water;
+    public Ray ray;
+
     private CustomRenderTextureUpdateZone[] zones = null;
     private Collider collider;
     private CustomRenderTextureUpdateZone defaultZone, normalZone, waveZone;
@@ -28,6 +32,7 @@ public class WaterSimulation : MonoBehaviour, IPointerClickHandler, IDragHandler
     {
         texture.Initialize();
         collider = GetComponent<Collider>();
+
 
         defaultZone = new CustomRenderTextureUpdateZone
         {
@@ -117,18 +122,6 @@ public class WaterSimulation : MonoBehaviour, IPointerClickHandler, IDragHandler
         // texture.Update(1);
     }
 
-     void ChangeCameraPosition() {
-      float targetY = GameObject.Find("Main Camera").transform.position.y;
-      float newY = targetY + 0.00145f;
-      GameObject.Find("Main Camera").transform.position = new Vector3(0.35f, newY, 0.13f);
-  }
-
-  void ChangeLightPosition() {
-      float targetY = GameObject.Find("Directional Light").transform.position.y;
-      float newY = targetY + 0.00145f;
-      GameObject.Find("Directional Light").transform.position = new Vector3(1.28f, newY, 0.252f);
-  }
-
     void UpdateZones()
     {
         if (collider == null) return;
@@ -148,7 +141,5 @@ public class WaterSimulation : MonoBehaviour, IPointerClickHandler, IDragHandler
             AddWave(hit.textureCoord2);
             
         }
-        //ChangeLightPosition();
-        //ChangeCameraPosition();
     }
 }

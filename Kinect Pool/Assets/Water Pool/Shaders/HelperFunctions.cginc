@@ -14,7 +14,7 @@
 #define HELPER_FUNCTIONS
 
 static const float IOR_AIR = 1;
-static const float IOR_WATER = 1.222;
+static const float IOR_WATER = 1.05;
 static const float3 abovewaterColor = float3(1.83, 1.7, 1.7);
 static const float3 underwaterColor = float3(0.4, 0.9, 1.0);
 float poolHeight;
