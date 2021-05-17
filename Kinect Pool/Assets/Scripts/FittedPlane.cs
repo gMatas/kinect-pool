@@ -32,6 +32,33 @@ public class FittedPlane : MonoBehaviour
         return fittedPoint;
     }
 
+    public bool IsWithinPlane(Vector3 point)
+    {
+        // TODO rotate point projection with the plane itself to reduce dimensions from 3D to 2D.
+        // TODO check if normalized point projection is contained by the fitted plane polygon.
+        // TODO simply project point projection to "near" points to get single-axis mapping proportions.
+        // TODO apply mapping proportions to output plane avatar point.
+
+        Vector3[] vertices = new Vector3[] {
+            CloseLeftPoint.position,
+            FarLeftPoint.position,
+            FarRightPoint.position,
+            CloseRightPoint.position
+        };
+
+        Vector3 baseUnitNormal = _planeNormal.normalized;
+        Vector3 previous = vertices[vertices.Length - 1];
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            Vector3 current = vertices[i];
+            Vector3 unitNormal = Vector3.Cross(point - previous, current - previous).normalized;
+            float product = Vector3.Dot(unitNormal, baseUnitNormal);
+            if (product < 0) return false;
+            previous = current;
+        }
+        return true;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

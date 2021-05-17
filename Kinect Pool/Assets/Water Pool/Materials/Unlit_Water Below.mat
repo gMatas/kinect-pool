@@ -46,7 +46,7 @@ Material:
     - poolHeight: 2
     - sphereRadius: 0.25
     m_Colors:
-    - eye: {r: 139.65646, g: 28.07492, b: -88.63024, a: 0}
+    - eye: {r: 129.51048, g: 25.077854, b: -71.00587, a: 0}
     - light: {r: -0, g: 0.9848078, b: 0.17364812, a: 0}
     - sphereCenter: {r: -200, g: -0.75, b: 0.2, a: 0}
   m_BuildTextureStacks: []

@@ -1,30 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteAlways]
 public class FittedPoint : MonoBehaviour
 {
     public FittedPlane Plane;
+
     public Transform PointProjection;
     public Transform PointProjectionOnNearPoints;
-
-    public Transform A;
-    public Transform B;
-    public Transform C;
+    public float PointNearProjectionDistanceRatio;
+    public bool WithinPlane;
 
     private Vector3 _pointProjection;
     private Vector3 _pointNearProjection;
     private float _pointNearProjectionDistanceRatio;
+    private bool _isWithinPlane;
 
     public bool IsWithinPlane()
     {
-        // TODO rotate point projection with the plane itself to reduce dimensions from 3D to 2D.
-        // TODO check if normalized point projection is contained by the fitted plane polygon.
-        // TODO simply project point projection to "near" points to get single-axis mapping proportions.
-        // TODO apply mapping proportions to output plane avatar point.
-
-        return false;
+        return _isWithinPlane;
     }
 
     public float GetPointNearProjectionDistanceRatio()
@@ -42,6 +35,7 @@ public class FittedPoint : MonoBehaviour
     {
         FitPointOnPlane();
         ComputePointNearProjection();
+        CheckIfWithinPlane();
     }
 
     // Update is called once per frame
@@ -49,12 +43,15 @@ public class FittedPoint : MonoBehaviour
     {
         FitPointOnPlane();
         ComputePointNearProjection();
+        CheckIfWithinPlane();
 
         if (Application.isEditor)
         {
             if (PointProjection) PointProjection.position = _pointProjection;
             if (PointProjectionOnNearPoints) PointProjectionOnNearPoints.position = _pointNearProjection;
-        }        
+            PointNearProjectionDistanceRatio = _pointNearProjectionDistanceRatio;
+            WithinPlane = _isWithinPlane;
+        }    
     }
 
     void FitPointOnPlane()
@@ -74,5 +71,10 @@ public class FittedPoint : MonoBehaviour
         float maxDistance = Vector3.Distance(Plane.CloseLeftPoint.position, Plane.CloseRightPoint.position);
         float distance = Vector3.Distance(_pointNearProjection, Plane.CloseRightPoint.position);
         _pointNearProjectionDistanceRatio = (maxDistance - distance) / maxDistance;
+    }
+
+    void CheckIfWithinPlane()
+    {
+        _isWithinPlane = Plane.IsWithinPlane(_pointProjection);
     }
 }
