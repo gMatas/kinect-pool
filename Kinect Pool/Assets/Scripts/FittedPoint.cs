@@ -6,7 +6,7 @@ public class FittedPoint : MonoBehaviour
     public FittedPlane Plane;
 
     public Transform PointProjection;
-    public Transform PointProjectionOnNearPoints;
+    public Transform PointNearProjection;
     public float PointNearProjectionDistanceRatio;
     public bool WithinPlane;
 
@@ -48,7 +48,7 @@ public class FittedPoint : MonoBehaviour
         if (Application.isEditor)
         {
             if (PointProjection) PointProjection.position = _pointProjection;
-            if (PointProjectionOnNearPoints) PointProjectionOnNearPoints.position = _pointNearProjection;
+            if (PointNearProjection) PointNearProjection.position = _pointNearProjection;
             PointNearProjectionDistanceRatio = _pointNearProjectionDistanceRatio;
             WithinPlane = _isWithinPlane;
         }    
@@ -61,15 +61,15 @@ public class FittedPoint : MonoBehaviour
 
     void ComputePointNearProjection()
     {
-        Vector3 basePoint = Plane.CloseLeftPoint.position;
-        Vector3 a = Plane.CloseRightPoint.position - basePoint;
+        Vector3 basePoint = Plane.NearLeftPoint.position;
+        Vector3 a = Plane.NearRightPoint.position - basePoint;
         Vector3 b = _pointProjection - basePoint;
 
         float projectionMagnitude = b.magnitude * Mathf.Cos(Mathf.Deg2Rad * Vector3.Angle(b, a));
         _pointNearProjection = projectionMagnitude * a.normalized + basePoint;
 
-        float maxDistance = Vector3.Distance(Plane.CloseLeftPoint.position, Plane.CloseRightPoint.position);
-        float distance = Vector3.Distance(_pointNearProjection, Plane.CloseRightPoint.position);
+        float maxDistance = Vector3.Distance(Plane.NearLeftPoint.position, Plane.NearRightPoint.position);
+        float distance = Vector3.Distance(_pointNearProjection, Plane.NearRightPoint.position);
         _pointNearProjectionDistanceRatio = (maxDistance - distance) / maxDistance;
     }
 
