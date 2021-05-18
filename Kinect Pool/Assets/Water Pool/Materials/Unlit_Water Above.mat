@@ -21,7 +21,7 @@ Material:
     m_TexEnvs:
     - _MainTex:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0, y: 0}
         m_Offset: {x: 0, y: 0}
     - causticTex:
         m_Texture: {fileID: 8400000, guid: 3062e5323be2b4230bcb1e33ed472d1f, type: 2}
@@ -46,7 +46,7 @@ Material:
     - poolHeight: 0.7
     - sphereRadius: 0.25
     m_Colors:
-    - eye: {r: 129.51048, g: 25.077854, b: -71.00587, a: 0}
+    - eye: {r: 0, g: 30, b: 0, a: 0}
     - light: {r: -0, g: 0.9848078, b: 0.17364812, a: 0}
     - sphereCenter: {r: -200, g: -0.75, b: 0.2, a: 0}
   m_BuildTextureStacks: []
