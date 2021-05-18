@@ -3,8 +3,8 @@ using UnityEngine;
 [ExecuteAlways]
 public class FittedPlane : MonoBehaviour
 {
-    public Transform CloseLeftPoint;
-    public Transform CloseRightPoint;
+    public Transform NearLeftPoint;
+    public Transform NearRightPoint;
     public Transform FarLeftPoint;
     public Transform FarRightPoint;
 
@@ -34,16 +34,11 @@ public class FittedPlane : MonoBehaviour
 
     public bool IsWithinPlane(Vector3 point)
     {
-        // TODO rotate point projection with the plane itself to reduce dimensions from 3D to 2D.
-        // TODO check if normalized point projection is contained by the fitted plane polygon.
-        // TODO simply project point projection to "near" points to get single-axis mapping proportions.
-        // TODO apply mapping proportions to output plane avatar point.
-
         Vector3[] vertices = new Vector3[] {
-            CloseLeftPoint.position,
+            NearLeftPoint.position,
             FarLeftPoint.position,
             FarRightPoint.position,
-            CloseRightPoint.position
+            NearRightPoint.position
         };
 
         Vector3 baseUnitNormal = _planeNormal.normalized;
@@ -81,8 +76,8 @@ public class FittedPlane : MonoBehaviour
     {
         _basePoint = (FarLeftPoint.position + FarRightPoint.position) * 0.5f;
         _planeNormal = Vector3.Cross(
-            CloseLeftPoint.position - _basePoint,
-            CloseRightPoint.position - _basePoint
+            NearLeftPoint.position - _basePoint,
+            NearRightPoint.position - _basePoint
         );
         _farLeftPointProjection = FitPoint(FarLeftPoint.position);
         _farRightPointProjection = FitPoint(FarRightPoint.position);

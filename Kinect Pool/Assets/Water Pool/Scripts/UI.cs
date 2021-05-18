@@ -6,70 +6,66 @@ using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
-    public GameObject uiCanvas;
-    public GameObject Avatar;
+    public Transform Avatar;
+    public FittedPlane SourcePlane;
 
-    public GameObject FRP;
-    public GameObject FLP;
-    public GameObject CRP;
-    public GameObject CLP;
+    public GameObject UiCanvas;
 
-    public Button exit;
-    public Button quit;
-    public Button FL;
-    public Button FR;
     public Button NL;
     public Button NR;
+    public Button FL;
+    public Button FR;
+    public Button Exit;
+    public Button Quit;
 
+    private Dictionary<object, string> _buttonNames;
 
     void Start()
     {
-		exit.onClick.AddListener(() => exitUI());
-        quit.onClick.AddListener(() => quitSimulation());
-
-		FL.onClick.AddListener(() => AddCoords("FL"));
-		FR.onClick.AddListener(() => AddCoords("FR"));
-		NL.onClick.AddListener(() => AddCoords("NL"));
-		NR.onClick.AddListener(() => AddCoords("NR"));
-    }
-
-    void AddCoords(string name){
-        var avatarPosition = Avatar.transform.position;
-
-        switch (name)
+        _buttonNames = new Dictionary<object, string>
         {
-        case "FL":
-            FLP.transform.position = avatarPosition;
-            FL.GetComponentInChildren<Text>().text = $"FL {avatarPosition}";
-            break;
-        case "FR":
-            FRP.transform.position = avatarPosition;
-            FR.GetComponentInChildren<Text>().text = $"FR {avatarPosition}";
-            break;
-        case "NL":
-            CLP.transform.position = avatarPosition;
-            NL.GetComponentInChildren<Text>().text = $"NL {avatarPosition}";
-            break;
-        case "NR":
-            CRP.transform.position = avatarPosition;
-            NR.GetComponentInChildren<Text>().text = $"NR {avatarPosition}";
-            break;
-        default:
-            break;
-        }
+            { FL, "FL" },
+            { FR, "FR" },
+            { NL, "NL" },
+            { NR, "NR" }
+        };
+
+        Exit.onClick.AddListener(() => ExitUI());
+        Quit.onClick.AddListener(() => QuitSimulation());
+
+        AssignButtonToPoint(FL, SourcePlane.FarLeftPoint);
+        AssignButtonToPoint(FR, SourcePlane.FarRightPoint);
+        AssignButtonToPoint(NL, SourcePlane.NearLeftPoint);
+        AssignButtonToPoint(NR, SourcePlane.NearRightPoint);
     }
 
-    void exitUI() {
-        uiCanvas.SetActive(false);
-	}
+    void AssignButtonToPoint(Button button, Transform point)
+    {
+        button.onClick.AddListener(() => AddCoords(button, point));
+    }
 
-    void quitSimulation() {
+    void AddCoords(Button button, Transform point)
+    {
+        var position = Avatar.transform.position;
+        point.position = position;
+        button.GetComponentInChildren<Text>().text = $"{_buttonNames[button]} {position}";
+    }
+
+    void ExitUI()
+    {
+        UiCanvas.SetActive(false);
+    }
+
+    void QuitSimulation()
+    {
         Application.Quit();
-	}
+    }
 
-    void Update() {
-     if (Input.GetKeyDown("escape")){
-          uiCanvas.SetActive(true);
-      }
+    void Update()
+    {
+        if (Input.GetKeyDown("escape"))
+        {
+            UiCanvas.SetActive(true);
+        }
     }
 }
