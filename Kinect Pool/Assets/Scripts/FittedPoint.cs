@@ -9,15 +9,22 @@ public class FittedPoint : MonoBehaviour
     public Transform PointNearProjection;
     public float PointNearProjectionDistanceRatio;
     public bool IsWithinPlane;
+    public bool IsPositive;
+    public bool IsAbove;
 
     private Vector3 _pointProjection;
     private Vector3 _pointNearProjection;
     private float _pointNearProjectionDistanceRatio;
     private bool _isWithinPlane;
 
-    public bool GetIsWithinPlane()
+    public Vector3 GetPointProjection()
     {
-        return _isWithinPlane;
+        return _pointProjection;
+    }
+
+    public Vector3 GetPointNearProjection()
+    {
+        return _pointNearProjection;
     }
 
     public float GetPointNearProjectionDistanceRatio()
@@ -25,9 +32,9 @@ public class FittedPoint : MonoBehaviour
         return _pointNearProjectionDistanceRatio;
     }
 
-    public Vector3 GetPointNearProjection()
+    public bool GetIsWithinPlane()
     {
-        return _pointNearProjection;
+        return _isWithinPlane;
     }
 
     // Start is called before the first frame update
@@ -68,9 +75,18 @@ public class FittedPoint : MonoBehaviour
         float projectionMagnitude = b.magnitude * Mathf.Cos(Mathf.Deg2Rad * Vector3.Angle(b, a));
         _pointNearProjection = projectionMagnitude * a.normalized + basePoint;
 
-        float maxDistance = Vector3.Distance(Plane.NearLeftPoint.position, Plane.NearRightPoint.position);
-        float distance = Vector3.Distance(_pointNearProjection, Plane.NearRightPoint.position);
-        _pointNearProjectionDistanceRatio = (maxDistance - distance) / maxDistance;
+        Vector3 maxDistanceVector = Plane.NearRightPoint.position - Plane.NearLeftPoint.position;
+        Vector3 distanceVector = _pointNearProjection - Plane.NearLeftPoint.position;
+
+        float distanceRatio = distanceVector.magnitude / maxDistanceVector.magnitude;
+        bool isPositive = 0 <= Vector3.Dot(maxDistanceVector.normalized, distanceVector.normalized);
+        bool isAbove = 0 > Vector3.Dot(
+            Vector3.Normalize(transform.position - _pointProjection),
+            Vector3.Normalize(Plane.GetPlaneNormal() - _pointProjection)
+        );
+        _pointNearProjectionDistanceRatio = IsPositive ? distanceRatio : -distanceRatio;
+        IsPositive = isPositive;
+        IsAbove = isAbove;
     }
 
     void CheckIfWithinPlane()

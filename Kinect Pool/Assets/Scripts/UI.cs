@@ -53,7 +53,7 @@ public class UI : MonoBehaviour
         button.GetComponentInChildren<Text>().text = $"{_buttonNames[button]} {position}";
     }
 
-    float parseFormToFloat(string formText) {
+    float ParseFormToFloat(string formText) {
         if (!string.IsNullOrEmpty(formText)) {
             return float.Parse(HeightMultiplier.text);
         } else {
@@ -62,11 +62,11 @@ public class UI : MonoBehaviour
     }
 
     float GetHeightMultiplier() {
-        return parseFormToFloat(HeightMultiplier.text);
+        return ParseFormToFloat(HeightMultiplier.text);
     } 
 
     float GetHeightConstant() {
-        return parseFormToFloat(HeightConstant.text);
+        return ParseFormToFloat(HeightConstant.text);
     } 
     
 
