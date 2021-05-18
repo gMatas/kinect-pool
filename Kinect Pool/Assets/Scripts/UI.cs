@@ -11,6 +11,7 @@ public class UI : MonoBehaviour
 
     public GameObject UiCanvas;
     public InputField HeightMultiplier;
+    public InputField HeightConstant;
 
     public Button NL;
     public Button NR;
@@ -55,10 +56,21 @@ public class UI : MonoBehaviour
     float GetHeightMultiplier() {
         try {
             return float.Parse(HeightMultiplier.text);
-        } catch {
+        }
+        catch {
             return 0f;
         }
     } 
+
+    float GetHeightConstant() {
+        try {
+            return float.Parse(HeightConstant.text);
+        } 
+        catch {
+            return 0f;
+        }
+    } 
+    
 
     void ExitUI()
     {
