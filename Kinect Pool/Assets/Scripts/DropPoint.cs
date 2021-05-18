@@ -6,8 +6,7 @@ using UnityEngine;
 public class DropPoint : MonoBehaviour
 {
     public FittedPoint SourcePoint;
-    public Transform SourceNearLeftPoint;
-    public Transform SourceNearRightPoint;
+    public FittedPlane SourcePlane;
 
     public Transform NearLeftPoint;
     public Transform NearRightPoint;
@@ -15,17 +14,17 @@ public class DropPoint : MonoBehaviour
     public Transform FarRightPoint;
 
     public float XRatio;
-    public float YRatio;
+    public float YRatio = 0.5f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        XRatio = SourcePoint.GetPointNearProjectionDistanceRatio();
     }
 
     // Update is called once per frame
     void Update()
     {
         XRatio = SourcePoint.GetPointNearProjectionDistanceRatio();
-    }
+    }    
 }
