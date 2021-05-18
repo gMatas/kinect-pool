@@ -8,14 +8,14 @@ public class FittedPoint : MonoBehaviour
     public Transform PointProjection;
     public Transform PointNearProjection;
     public float PointNearProjectionDistanceRatio;
-    public bool WithinPlane;
+    public bool IsWithinPlane;
 
     private Vector3 _pointProjection;
     private Vector3 _pointNearProjection;
     private float _pointNearProjectionDistanceRatio;
     private bool _isWithinPlane;
 
-    public bool IsWithinPlane()
+    public bool GetIsWithinPlane()
     {
         return _isWithinPlane;
     }
@@ -50,7 +50,7 @@ public class FittedPoint : MonoBehaviour
             if (PointProjection) PointProjection.position = _pointProjection;
             if (PointNearProjection) PointNearProjection.position = _pointNearProjection;
             PointNearProjectionDistanceRatio = _pointNearProjectionDistanceRatio;
-            WithinPlane = _isWithinPlane;
+            IsWithinPlane = _isWithinPlane;
         }    
     }
 

@@ -53,7 +53,11 @@ public class UI : MonoBehaviour
     }
 
     float GetHeightMultiplier() {
-        return float.Parse(HeightMultiplier.text);
+        try {
+            return float.Parse(HeightMultiplier.text);
+        } catch {
+            return 0f;
+        }
     } 
 
     void ExitUI()
