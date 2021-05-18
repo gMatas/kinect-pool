@@ -24,23 +24,6 @@ public class UI : MonoBehaviour
 
     void Start()
     {
-        uiCanvas = GameObject.Find("Configuration UI Canvas");
-        Avatar = GameObject.Find("Avatar Stub");
-
-        FRP = GameObject.Find("Far Right");
-        FLP = GameObject.Find("Far Left");
-        CRP = GameObject.Find("Close Right");
-        CLP = GameObject.Find("Close Left");
-
-
-        exit.GetComponent<Button>();
-        quit.GetComponent<Button>();
-
-        NR.GetComponent<Button>();
-        NL.GetComponent<Button>();
-        FR.GetComponent<Button>();
-        FL.GetComponent<Button>();
-
 		exit.onClick.AddListener(() => exitUI());
         quit.onClick.AddListener(() => quitSimulation());
 
@@ -57,15 +40,19 @@ public class UI : MonoBehaviour
         {
         case "FL":
             FLP.transform.position = avatarPosition;
+            FL.GetComponentInChildren<Text>().text = $"FL {avatarPosition}";
             break;
         case "FR":
             FRP.transform.position = avatarPosition;
+            FR.GetComponentInChildren<Text>().text = $"FR {avatarPosition}";
             break;
         case "NL":
             CLP.transform.position = avatarPosition;
+            NL.GetComponentInChildren<Text>().text = $"NL {avatarPosition}";
             break;
         case "NR":
             CRP.transform.position = avatarPosition;
+            NR.GetComponentInChildren<Text>().text = $"NR {avatarPosition}";
             break;
         default:
             break;
