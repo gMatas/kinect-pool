@@ -10,6 +10,7 @@ public class UI : MonoBehaviour
     public FittedPlane SourcePlane;
 
     public GameObject UiCanvas;
+    public InputField HeightMultiplier;
 
     public Button NL;
     public Button NR;
@@ -50,6 +51,10 @@ public class UI : MonoBehaviour
         point.position = position;
         button.GetComponentInChildren<Text>().text = $"{_buttonNames[button]} {position}";
     }
+
+    float GetHeightMultiplier() {
+        return float.Parse(HeightMultiplier.text);
+    } 
 
     void ExitUI()
     {
