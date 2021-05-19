@@ -79,7 +79,9 @@ public class FittedPoint : MonoBehaviour
         Vector3 maxDistanceVector = Plane.NearRightPoint.position - Plane.NearLeftPoint.position;
         Vector3 distanceVector = _pointNearProjection - Plane.NearLeftPoint.position;
 
-        float distanceRatio = distanceVector.magnitude / maxDistanceVector.magnitude;
+        float maxDistance = maxDistanceVector.magnitude;
+        float distanceRatio = maxDistance != 0 ? distanceVector.magnitude / maxDistance : 0;
+
         bool isPositive = 0 <= Vector3.Dot(maxDistanceVector.normalized, distanceVector.normalized);
         bool isAbove = 0 > Vector3.Dot(
             Vector3.Normalize(transform.position - _pointProjection),

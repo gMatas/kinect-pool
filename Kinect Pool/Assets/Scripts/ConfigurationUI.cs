@@ -8,6 +8,7 @@ public class ConfigurationUI : MonoBehaviour
 {
     public Transform Avatar;
     public FittedPlane SourcePlane;
+    public DropPoint DropPoint;
 
     public GameObject UiCanvas;
     public InputField HeightMultiplier;
@@ -20,10 +21,18 @@ public class ConfigurationUI : MonoBehaviour
     public Button Exit;
     public Button Quit;
 
+    private float _heightConstant;
+    private float _heightMultiplier;
     private Dictionary<object, string> _buttonNames;
 
     void Start()
     {
+        _heightConstant = DropPoint.HeightConstant;
+        _heightMultiplier = DropPoint.HeightMultiplier;
+
+        HeightConstant.text = _heightConstant.ToString();
+        HeightMultiplier.text = _heightMultiplier.ToString();
+
         _buttonNames = new Dictionary<object, string>
         {
             { FL, "FL" },
@@ -39,6 +48,19 @@ public class ConfigurationUI : MonoBehaviour
         AssignButtonToPoint(FR, SourcePlane.FarRightPoint);
         AssignButtonToPoint(NL, SourcePlane.NearLeftPoint);
         AssignButtonToPoint(NR, SourcePlane.NearRightPoint);
+
+        HeightConstant.onValueChanged.AddListener(UpdateHeightConstant);
+        HeightMultiplier.onValueChanged.AddListener(UpdateHeightMultiplier);
+    }
+
+    void UpdateHeightMultiplier(string value)
+    {
+        _heightMultiplier = ParseFormToFloat(HeightMultiplier.text, _heightMultiplier);
+    }
+
+    void UpdateHeightConstant(string value)
+    {
+        _heightConstant = ParseFormToFloat(HeightConstant.text, _heightConstant);
     }
 
     void AssignButtonToPoint(Button button, Transform point)
@@ -53,22 +75,22 @@ public class ConfigurationUI : MonoBehaviour
         button.GetComponentInChildren<Text>().text = $"{_buttonNames[button]} {position}";
     }
 
-    float ParseFormToFloat(string formText) {
-        if (!string.IsNullOrEmpty(formText)) {
-            return float.Parse(HeightMultiplier.text);
-        } else {
-            return 0f;
-        }
+    float ParseFormToFloat(string text, float defaultValue)
+    {
+        bool isSuccess = float.TryParse(text, out float outputValue);
+        if (isSuccess) return outputValue;
+        return defaultValue;
     }
 
-    float GetHeightMultiplier() {
-        return ParseFormToFloat(HeightMultiplier.text);
-    } 
+    public float GetHeightMultiplier()
+    {
+        return _heightMultiplier;
+    }
 
-    float GetHeightConstant() {
-        return ParseFormToFloat(HeightConstant.text);
-    } 
-    
+    public float GetHeightConstant()
+    {
+        return _heightConstant;
+    }
 
     void ExitUI()
     {

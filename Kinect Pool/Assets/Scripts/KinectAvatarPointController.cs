@@ -21,7 +21,6 @@ public class KinectAvatarPointController : MonoBehaviour
         KinectUnity avatar;
         if (avatar = KinectDevice.PrefabParent.GetComponentInChildren<KinectUnity>())
         {
-            var renderer = avatar.GetComponent<Renderer>();
             GameObject[] bodyParts = new GameObject[] {
                 avatar.Head,
                 avatar.Body,
