@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class UI : MonoBehaviour
+public class ConfigurationUI : MonoBehaviour
 {
     public Transform Avatar;
     public FittedPlane SourcePlane;

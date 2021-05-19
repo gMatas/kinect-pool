@@ -55,7 +55,7 @@ public class DropPoint : MonoBehaviour
 
     void UpdatePosition()
     {
-        transform.localPosition = new Vector2(Mathf.Clamp(_point.x, 0, 1), Mathf.Clamp(_point.y, 0, 1));
+        transform.localPosition = new Vector3(Mathf.Clamp(_point.x, 0, 1), Mathf.Clamp(_point.y, 0, 1), 0);
     }
 
     void UpdateSourcePointMotionState()
