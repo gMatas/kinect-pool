@@ -16,6 +16,8 @@ using UnityEngine.EventSystems;
 // http://tips.hecomi.com/entry/2017/05/17/020037
 public class WaterSimulation : MonoBehaviour, IPointerClickHandler, IDragHandler
 {
+    public DropPoint DropPoint;
+
     public CustomRenderTexture texture;
     public float dropRadius; // uv units [0, 1]
     public bool pause = false;
@@ -126,6 +128,12 @@ public class WaterSimulation : MonoBehaviour, IPointerClickHandler, IDragHandler
     {
         if (collider == null) return;
 
+        UpdateZonesByMouse();
+        UpdateZonesByDropPoint();
+    }
+
+    void UpdateZonesByMouse()
+    {
         bool leftClick = Input.GetMouseButton(0);
         if (!leftClick) return;
 
@@ -139,7 +147,18 @@ public class WaterSimulation : MonoBehaviour, IPointerClickHandler, IDragHandler
             // Debug.Log("Clicked uv " + hit.textureCoord2);
             // AddWave(hit.textureCoord2, leftClick ? 2 : 3);
             AddWave(hit.textureCoord2);
-            
+
         }
+    }
+
+    void UpdateZonesByDropPoint()
+    {
+        if (
+            !DropPoint.IsSourcePointMoving || 
+            !DropPoint.SourcePoint.IsWithinPlane ||
+            !DropPoint.SourcePoint.IsWithinNearBounds
+        ) return;
+
+        AddWave(DropPoint.transform.localPosition);
     }
 }

@@ -9,6 +9,7 @@ public class FittedPoint : MonoBehaviour
     public Transform PointNearProjection;
     public float PointNearProjectionDistanceRatio;
     public bool IsWithinPlane;
+    public bool IsWithinNearBounds;
     public bool IsPositive;
     public bool IsAbove;
 
@@ -85,6 +86,7 @@ public class FittedPoint : MonoBehaviour
             Vector3.Normalize(Plane.GetPlaneNormal() - _pointProjection)
         );
         _pointNearProjectionDistanceRatio = IsPositive ? distanceRatio : -distanceRatio;
+        IsWithinNearBounds = 0 <= _pointNearProjectionDistanceRatio && _pointNearProjectionDistanceRatio <= 1;
         IsPositive = isPositive;
         IsAbove = isAbove;
     }

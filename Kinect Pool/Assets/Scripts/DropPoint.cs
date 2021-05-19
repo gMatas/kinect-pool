@@ -7,20 +7,16 @@ public class DropPoint : MonoBehaviour
 {
     public FittedPoint SourcePoint;
     public FittedPlane SourcePlane;
-
-    public Transform NearLeftPoint;
-    public Transform NearRightPoint;
-    public Transform FarLeftPoint;
-    public Transform FarRightPoint;
-
     public float HeightConstant = 0;
     public float HeightMultiplier = 1;
+    public float MinMoveDistance = 0.000001f;
 
-    public bool IsAbove;
+    public bool IsSourcePointMoving;
 
     private Vector2 _point;
+    private Vector3 _prevSourcePointPosition;
 
-    public Vector2 GetPoint()
+    public Vector2 GetRatios()
     {
         return _point;
     }
@@ -31,6 +27,9 @@ public class DropPoint : MonoBehaviour
         _point = new Vector2(0, 0);
         UpdatePoint();
         UpdatePosition();
+
+        IsSourcePointMoving = false;
+        _prevSourcePointPosition = SourcePoint.transform.position;
     }
 
     // Update is called once per frame
@@ -38,6 +37,9 @@ public class DropPoint : MonoBehaviour
     {
         UpdatePoint();
         UpdatePosition();
+
+        // Check if source point is moving
+        UpdateSourcePointMotionState();
     }
 
     void UpdatePoint()
@@ -54,5 +56,13 @@ public class DropPoint : MonoBehaviour
     void UpdatePosition()
     {
         transform.localPosition = new Vector2(Mathf.Clamp(_point.x, 0, 1), Mathf.Clamp(_point.y, 0, 1));
+    }
+
+    void UpdateSourcePointMotionState()
+    {
+        Vector3 _sourcePointPosition = SourcePoint.transform.position;
+        float movedDistance = Vector3.Distance(_prevSourcePointPosition, _sourcePointPosition);
+        IsSourcePointMoving = movedDistance >= MinMoveDistance;
+        _prevSourcePointPosition = SourcePoint.transform.position;        
     }
 }
