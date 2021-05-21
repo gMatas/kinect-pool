@@ -4,4 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Water Pool/Scenes/Pool.unity
+    guid: 26c4105df060945feba78c4104ef46f5
+  m_configObjects: {}

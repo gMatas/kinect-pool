@@ -3742,7 +3742,7 @@ PrefabInstance:
     - target: {fileID: 522285810085216158, guid: ef1e7b85e10107947a0d3feb7889f8c4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.91552293
+      value: 0.08447708
       objectReference: {fileID: 0}
     - target: {fileID: 522285810085216159, guid: ef1e7b85e10107947a0d3feb7889f8c4,
         type: 3}
@@ -3754,6 +3754,21 @@ PrefabInstance:
       propertyPath: SourcePoint
       value: 
       objectReference: {fileID: 578007111}
+    - target: {fileID: 522285810085216159, guid: ef1e7b85e10107947a0d3feb7889f8c4,
+        type: 3}
+      propertyPath: MinMoveDistance
+      value: 0.221
+      objectReference: {fileID: 0}
+    - target: {fileID: 522285810085216159, guid: ef1e7b85e10107947a0d3feb7889f8c4,
+        type: 3}
+      propertyPath: HeightMultiplier
+      value: -0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 522285810085216159, guid: ef1e7b85e10107947a0d3feb7889f8c4,
+        type: 3}
+      propertyPath: IsSourcePointMoving
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef1e7b85e10107947a0d3feb7889f8c4, type: 3}
 --- !u!114 &3453657842253248494 stripped

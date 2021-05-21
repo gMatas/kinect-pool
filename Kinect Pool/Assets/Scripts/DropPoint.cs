@@ -9,7 +9,7 @@ public class DropPoint : MonoBehaviour
     public FittedPlane SourcePlane;
     public float HeightConstant = 0;
     public float HeightMultiplier = 1;
-    public float MinMoveDistance = 0.000001f;
+    public float MinMoveDistance;
 
     public bool IsSourcePointMoving;
 
